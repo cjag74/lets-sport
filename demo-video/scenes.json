@@ -1,0 +1,10 @@
+[
+  { "id": "01-hook", "title": "Hook", "text": "Ever booked a badminton court, and ended up one player short? Or posted in three group chats, and got two maybes and a thumbs up?" },
+  { "id": "02-meet", "title": "Meet Let's Sport", "text": "Meet Let's Sport! It brings your neighbours together for badminton and basketball. Signing up takes ten seconds… and yes, there's confetti." },
+  { "id": "03-browse", "title": "Find a game", "text": "Here's what's happening near you. Every card shows the date, the venue, the skill level, and how many spots are left. Only into basketball? One tap." },
+  { "id": "04-host", "title": "Host a game", "text": "Want to start your own game? Pick a sport, give it a name, set the time, and drop a Google Maps pin, so nobody ends up at the wrong court." },
+  { "id": "05-live", "title": "It's live", "text": "Hit post, and your game is live for the whole neighbourhood." },
+  { "id": "06-join", "title": "Join in", "text": "Spotted a game you like? Tap \"I'm in\", and you're on the team. Plans change? One tap frees your spot for someone else." },
+  { "id": "07-map", "title": "Get there", "text": "On game day, open the map, and get directions right to the court." },
+  { "id": "08-cta", "title": "Call to action", "text": "Badminton, basketball, and good company, all in one place. Sign up today, host your first game this week… and let's sport!" }
+]

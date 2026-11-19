@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Let's Sport!</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏸</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- floating background balls -->
+  <div class="bg-balls" aria-hidden="true">
+    <span>🏀</span><span>🏸</span><span>🏀</span><span>🏸</span><span>⭐</span><span>🏀</span><span>🏸</span>
+  </div>
+
+  <!-- ============ AUTH SCREEN ============ -->
+  <section id="auth-screen" class="hidden">
+    <div class="auth-wrap">
+      <div class="hero">
+        <div class="logo big">Let's <span>Sport!</span></div>
+        <p class="tagline">Find your crew. Book the court. Play together! 🎉</p>
+        <div class="hero-sports">
+          <div class="sport-chip badminton">🏸 Badminton</div>
+          <div class="sport-chip basketball">🏀 Basketball</div>
+        </div>
+      </div>
+
+      <div class="card auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-mode="login">Log in</button>
+          <button class="auth-tab" data-mode="register">Sign up</button>
+        </div>
+        <form id="auth-form" autocomplete="on">
+          <label class="field register-only hidden">
+            <span>Your name</span>
+            <input name="name" type="text" maxlength="60" placeholder="e.g. Sam the Smasher" />
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input name="email" type="email" required placeholder="you@example.com" autocomplete="email" />
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input name="password" type="password" required minlength="6" placeholder="At least 6 characters" autocomplete="current-password" />
+          </label>
+          <p class="form-error" id="auth-error"></p>
+          <button type="submit" class="btn btn-primary btn-block" id="auth-submit">Let's go! 🚀</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAIN APP ============ -->
+  <section id="app-screen" class="hidden">
+    <header class="topbar">
+      <div class="logo">Let's <span>Sport!</span></div>
+      <div class="topbar-right">
+        <div class="hello">Hi, <strong id="user-name"></strong> 👋</div>
+        <button class="btn btn-ghost" id="logout-btn">Log out</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="welcome">
+        <div>
+          <h1>Who's up for a game? 🙌</h1>
+          <p>Join a game near you, or start your own and rally the crew.</p>
+        </div>
+        <button class="btn btn-primary btn-lg" id="new-btn">＋ Host a game</button>
+      </div>
+
+      <div class="filters">
+        <div class="pill-group" id="sport-filter">
+          <button class="pill active" data-sport="">✨ All sports</button>
+          <button class="pill" data-sport="badminton">🏸 Badminton</button>
+          <button class="pill" data-sport="basketball">🏀 Basketball</button>
+        </div>
+        <div class="pill-group" id="view-filter">
+          <button class="pill active" data-view="upcoming">📅 Upcoming</button>
+          <button class="pill" data-view="mine">💛 My games</button>
+          <button class="pill" data-view="past">🕰️ Past</button>
+        </div>
+      </div>
+
+      <div id="activity-list" class="grid"></div>
+      <div id="empty" class="empty hidden">
+        <div class="empty-emoji">🏟️</div>
+        <h3>The court is empty!</h3>
+        <p>Be the hero — host the first game and get people moving.</p>
+        <button class="btn btn-primary" id="empty-new-btn">＋ Host a game</button>
+      </div>
+    </main>
+  </section>
+
+  <!-- ============ NEW ACTIVITY MODAL ============ -->
+  <div class="modal hidden" id="modal">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card card">
+      <button class="modal-x" data-close aria-label="Close">✕</button>
+      <h2>Host a game 🎯</h2>
+      <form id="activity-form">
+        <div class="sport-picker">
+          <label class="sport-option badminton">
+            <input type="radio" name="sport" value="badminton" checked />
+            <span><b>🏸</b>Badminton</span>
+          </label>
+          <label class="sport-option basketball">
+            <input type="radio" name="sport" value="basketball" />
+            <span><b>🏀</b>Basketball</span>
+          </label>
+        </div>
+        <label class="field">
+          <span>Game title</span>
+          <input name="title" required maxlength="80" placeholder="Friday night doubles!" />
+        </label>
+        <div class="row">
+          <label class="field">
+            <span>Date</span>
+            <input name="date" type="date" required />
+          </label>
+          <label class="field">
+            <span>Time</span>
+            <input name="time" type="time" required value="18:00" />
+          </label>
+        </div>
+        <label class="field">
+          <span>Venue</span>
+          <input name="venue" required maxlength="120" placeholder="Community Sports Hall, Court 3" />
+        </label>
+        <div class="map-box">
+          <div class="map-box-title">🗺️ Map location <small>(optional)</small></div>
+          <div class="map-tools">
+            <input name="map_url" type="url" inputmode="url" placeholder="Paste a Google Maps link" />
+            <button type="button" class="btn btn-ghost btn-sm" id="use-location">📍 Use my location</button>
+          </div>
+          <p class="map-hint">In Google Maps, find the venue → <b>Share</b> → <b>Copy link</b>, then paste it here. Or just type the venue above and we'll find it.</p>
+          <input type="hidden" name="lat" />
+          <input type="hidden" name="lng" />
+          <div class="map-preview hidden" id="map-preview">
+            <iframe title="Venue map preview" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-preview-bar">
+              <span id="map-status"></span>
+              <button type="button" class="link-btn" id="map-clear">✕ Clear pin</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <label class="field">
+            <span>Max players (incl. you)</span>
+            <input name="max_players" type="number" min="2" max="50" value="4" required />
+          </label>
+          <label class="field">
+            <span>Skill level</span>
+            <select name="skill_level">
+              <option>All levels</option>
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+          </label>
+        </div>
+        <label class="field">
+          <span>Notes (optional)</span>
+          <textarea name="notes" rows="2" maxlength="500" placeholder="Bring your own racket, shuttles provided 🙂"></textarea>
+        </label>
+        <p class="form-error" id="activity-error"></p>
+        <button type="submit" class="btn btn-primary btn-block">Post my game 🎉</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
